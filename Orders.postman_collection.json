@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Limo Orders (Vault Token)",
+    "_postman_id": "0f0c0aaa-1111-2222-3333-abcdef123456",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Charge (CAPTURE now)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vaultId\": \"TOKEN-REPLACE\",\n  \"amount\": \"20.00\",\n  \"currency\": \"USD\",\n  \"idempotencyKey\": \"charge_{{timestamp}}\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/orders/charge", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api","orders","charge"] }
+      }
+    },
+    {
+      "name": "Authorize (hold funds)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vaultId\": \"TOKEN-REPLACE\",\n  \"amount\": \"20.00\",\n  \"currency\": \"USD\",\n  \"idempotencyKey\": \"auth_{{timestamp}}\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/orders/authorize", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api","orders","authorize"] }
+      }
+    },
+    {
+      "name": "Capture Authorization",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"authorizationId\": \"REPLACE_AUTH_ID\",\n  \"amount\": \"20.00\",\n  \"currency\": \"USD\",\n  \"idempotencyKey\": \"cap_{{timestamp}}\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/orders/capture-authorization", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api","orders","capture-authorization"] }
+      }
+    },
+    {
+      "name": "Void Authorization",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"authorizationId\": \"REPLACE_AUTH_ID\",\n  \"idempotencyKey\": \"void_{{timestamp}}\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/orders/void-authorization", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api","orders","void-authorization"] }
+      }
+    },
+    {
+      "name": "Refund Capture",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"captureId\": \"REPLACE_CAPTURE_ID\",\n  \"amount\": \"20.00\",\n  \"currency\": \"USD\",\n  \"idempotencyKey\": \"refund_{{timestamp}}\"\n}"
+        },
+        "url": { "raw": "http://localhost:4000/api/orders/refund", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api","orders","refund"] }
+      }
+    }
+  ]
+}
