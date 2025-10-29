@@ -18,6 +18,12 @@ const TransactionSchema = new mongoose.Schema(
     vaultId: { type: String },        // TOKEN-...
     customerId: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" },
 
+      fundingSource: { type: String, enum: ["CARD","PAYPAL","PAYLATER","UNKNOWN"], default: "UNKNOWN" },
+  instrumentBrand: { type: String },                  // e.g., "VISA" or "PayPal"
+  instrumentLast4: { type: String },
+  payerEmail: { type: String },
+
+  
     // Raw payloads (for debugging)
     raw: { type: Object }
   },

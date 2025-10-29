@@ -7,7 +7,7 @@ const paymentMethodSchema = new mongoose.Schema(
       ref: "Customer",
       required: true,
     },
-    type: { type: String, enum: ["card", "paypal"], required: true },
+       type: { type: String, enum: ["card", "paypal", "unknown"], required: true },
     vaultId: { type: String, unique: true }, // PayPal vault token (later)
     brand: String,
     last4: String,
